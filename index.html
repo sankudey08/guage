@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Gauge</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div>
+      <input type="text" onchange="setValue(this.value)" />
+    </div>
+    <div class="gauge">
+      <div class="gauge__body">
+        <div class="gauge__fill"></div>
+        <div class="gauge__cover"></div>
+      </div>
+    </div>
+    <script>
+      const gaugeElement = document.querySelector(".gauge");
+
+      var pc;
+      setValue(pc);
+      function setValue(pc = 0) {
+        setGaugeValue(gaugeElement, pc / 100);
+      }
+
+      function setGaugeValue(gauge, value = 0) {
+        if (value < 0 || value > 1) {
+          return;
+        }
+
+        gauge.querySelector(".gauge__fill").style.transform = `rotate(${
+          value / 2
+        }turn)`;
+        gauge.querySelector(".gauge__cover").textContent = `${Math.round(
+          value * 100
+        )}`;
+      }
+    </script>
+  </body>
+</html>
